@@ -1,0 +1,44 @@
+.user-form-main{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 40px;
+}
+.user-form{
+    width: 400px;
+    border: 1px solid black;
+    box-shadow: 0 0 2px 2px rgb(182, 179, 179);
+    border-radius: 20px;
+    padding: 1rem 3rem;
+}
+.user-form input[type='submit']{
+    background-color: rgb(235, 191, 49);
+    border: 1px solid rgb(184, 149, 34);
+    border-radius: 20px;
+    padding: 0.5rem;
+    margin:20px 0;
+    width: 60%;
+}
+.user-form input[type='submit']:hover{
+    background-color: rgb(228, 176, 8);
+}
+.user-Form p{
+    margin-top: 10px;
+    font-size: 16px;
+}
+.user-Form input{
+    margin-top: 15px;
+}
+.user-error{
+    text-align: center;
+}
+.login-link a{
+    color:black;
+    text-decoration: none;
+}
+.login-link a:hover{
+    font-weight: bold;
+}

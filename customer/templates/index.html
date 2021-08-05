@@ -1,0 +1,112 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href='{% static '/css/main.css' %}?{% now "U" %}'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <div class="left-header">
+                <ul>
+                    <li><a href="/">Home Page</a></li>
+                    {% if perms.Customer.add_user %}
+                    <li><a href="{% url 'new-customer' %}">New User</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% if perms.UserInfoProcess.searched_user%}
+                <div class="mid-header">
+                    <form method="GET">
+                        <div class="search-box">
+                            <input type="text" name="word" placeholder="Search a word!">
+                            <input type="submit" text="Ara">
+                        </div>
+                        <div class="pagination-box">
+                        Paginate number:
+                        <select name="paginate">
+                            <option value="2">2</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25" selected>25</option>
+                        </select>
+                        </div>
+                    </form>           
+                </div>
+                {% endif %}
+            <div class="user_auth">
+                    {% if user.is_authenticated %}
+                        <ul>
+                            <li>Hello, {{user.username}}</li>
+                            <li><a href="/accounts/logout">Logout</a></li>
+                        </ul>
+                    {% endif%}
+            </div>
+        </div>
+        
+        {% if perms.Customer.view_user %}
+            <div class="user_list"> 
+                {% if customer_list %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>ID</td>  <td>TC NO</td>  <td>NAME</td>  <td>SURNAME</td>  <td>PHONE</td>  <td>CITY</td>  <td>STATE</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for customer in customer_list %}
+                            <tr>
+                                {% if perms.Customer.update_user%}
+                                    <td> <a href="/detail/{{customer.id}}">{{customer.id}}</a></td>
+                                    <td> <a href="/detail/{{customer.id}}">{{customer.tc_no}}</a></td>
+                                    <td> <a href="/detail/{{customer.id}}">{{customer.name}}</a></td>
+                                    <td><a href="/detail/{{customer.id}}">{{customer.surname}}</a></td>
+                                    <td> <a href="/detail/{{customer.id}}">{{customer.phone}} </a></td>
+                                    <td> <a href="/detail/{{customer.id}}">{{customer.city}}</a></td>
+                                    <td> <a href="/detail/{{customer.id}}">{{customer.state}}</a></td>
+                                {% endif %}
+                                {% if not perms.Customer.update_user%}
+                                    <td>{{customer.id}}</td>
+                                    <td>{{customer.tc_no}}</td>
+                                    <td>{{customer.name}}</td>
+                                    <td>{{customer.surname}}</td>
+                                    <td>{{customer.phone}}</td>
+                                    <td>{{customer.city}}</td>
+                                    <td>{{customer.state}}</td>
+                                {% endif %}
+                                {% if perms.Customer.delete_user %}
+                                    <td><a href="/delete/{{customer.id}}" class="del">Delete</a></td>
+                                {% endif %}
+                            </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <div class="pages">
+                <form method="GET">
+                    {% if customer_list.has_previous %}
+                        <a class="btn btn-outline-info" href="?page={{customer_list.previous_page_number}}&word={{word}}&paginate={{paginate}}">PREVIOUS</a>
+                    {% endif %}
+                    <a class="btn btn-outline-info" href="#">{{customer_list.number}}</a>
+                    {% if customer_list.has_next %}
+                        <a class="btn btn-outline-info" href="?page={{customer_list.next_page_number}}&word={{word}}&paginate={{paginate}}">NEXT</a></li>
+                    {% endif %}
+                </form>
+            </div>
+        {% endif %}
+        {% if not perms.Customer.view_user %}
+            <div class="user-error">
+                <div class="user-error">
+                    <h2> Unauthorized Access! </h2>
+                </div>
+                {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}">Click For Login!</a>
+                {% endif %}
+            </div>
+        {%endif%}
+
+    </body>
+</html>

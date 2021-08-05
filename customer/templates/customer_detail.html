@@ -1,0 +1,76 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href='{% static '/css/form.css' %}?{% now "U" %}'>
+    </head>
+
+    <body>
+        <div class="header">
+            <ul>
+                <li><a href="/">Home Page</a></li>
+                    {% if perms.customer.add_user %}
+                    <li><a href="/new-customer/">New User</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        {% if perms.Customer.view_user%}
+            <div class="form-main">
+                <div class="form">
+                    <h2>Detail Page </h2>
+                        <table>
+                            <tr>
+                                <td>Id</td>
+                                <td>{{object.id}}</td>
+                            </tr>
+                            <tr>
+                                <td>Tc No:</td>
+                                <td>{{object.tc_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td>{{object.name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Surname:</td>
+                                <td>{{object.surname}}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>{{object.phone}}</td>
+                            </tr>
+                            <tr>
+                                <td>City:</td>
+                                <td>{{object.city}}</td>
+                            </tr>
+                            <tr>
+                                <td>State:</td>
+                                <td>{{object.state}}</td>
+                            </tr>
+                        <table>
+                        {% if perms.customer.update_user%}
+                        <div class="link">
+                            <a href="/update/{{object.id}}">Update</a>
+                        </div>
+                        {% endif %}
+                </div>
+                <div class="error">
+                    <table>
+                        <tr><td>{{form.errors}}<td></tr>
+                    </table>            
+                </div>
+            </div>
+        {% endif %}
+        
+        
+
+        {% if not perms.Customer.view_user%}
+            <div class="user-error">
+                <h2> Unauthorized Access! </h2>
+                <a href="/">You Can Return To The Home Page Here. </a>
+            </div>
+        {% endif %}
+        
+    </body>
+
+</html>

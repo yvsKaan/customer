@@ -1,0 +1,40 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href='{% static '/css/form.css' %}?{% now "U" %}'>
+    </head>
+
+    <body>
+        <div class="header">
+            <ul>
+                <li><a href="/">Home Page</a></li>
+                    {% if perms.Customer.add_user %}
+                    <li><a href="/new-customer/">New User</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        
+        <div class = "form-main">
+            {% if perms.Customer.update_user %}
+            <div class = "form">
+                <h2>Update Page </h2>
+                <form method="POST" >
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <div class="link">
+                    <input type = "submit" value = "Save">
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            {% if not perms.Customer.update_user%}
+            <div class="user-error">
+                <h2> Unauthorized Access! </h2>
+                <a href="/">You Can Return To The Home Page Here. </a>
+            </div>
+            {% endif %}
+        </div>
+        
+    </body>
+
+</html>

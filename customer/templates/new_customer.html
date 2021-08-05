@@ -1,0 +1,72 @@
+{% load static %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href='{% static '/css/form.css' %}?{% now "U" %}'>
+    </head>
+
+    <body>
+        <div class="header">
+            <ul>
+                <li><a href="/">Home Page</a></li>
+                {% if perms.Customer.add_user %}
+                    <li><a href="{% url 'new-customer' %}">New User</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        {% if perms.Customer.add_user%}
+            <div class="newUser-form-main">
+                <div class="newUser-form">
+                    <h2>New User Page </h2>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td>Tc No:</td> <td><input type="text" name="tc_no" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td> <td><input type="text" name="name" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>Surname:</td> <td><input type="text" name="surname" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td> <td><input type="text" name="phone" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>City:</td> <td><input type="text" name="city" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>State:</td> <td><input type="text" name="state" value=""></td>
+                            </tr>
+                        <table>
+                        <input type="submit" value="Ekle" >
+
+                    <div class="error">
+                    {% if form.errors %}
+                    <table>
+                        <tr>
+                        <td>{{form.errors}}<td>
+                        </tr>
+                    </table>
+                    {% endif %}
+                        
+                        
+                    </div>
+                </form>
+
+                </div>
+            </div
+        {% endif %}
+
+        {% if not perms.Customer.add_user%}
+            <div class="user-error">
+                <h2> Unauthorized Access! </h2>
+                <a href="/"> You Can Return To The Home Page Here.</a>
+            </div>
+        {% endif %}
+        
+       
+    </body>
+
+</html>

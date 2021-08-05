@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    text-decoration: none;
+    color:black;
+    list-style-type: none;
+}
+ul{
+    display: flex;
+    color:black;
+}
+li{
+    margin-right: 30px;
+    color:black;
+}
+.header a{
+    color:black;
+}
+.header{
+    display: flex;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(247, 247, 247);
+    box-shadow: 0 0 3px 0 rgb(94, 93, 93);
+    justify-content: space-between;
+    align-items: center;
+}
+.search-box{
+    margin-bottom: 0.5rem;
+}
+.pagination-box{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+table tr{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.paginate{
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+.paginate-form td {
+    padding: 0.5rem;
+}
+.user_list{
+    width: 100%;
+    height: calc(100vh-200px);
+    margin-top: 2rem;
+}
+.user_list a{
+    color:black;
+}
+.user_list .del {
+    color:red;
+    font-size: 16px;
+}
+.user_list .del:hover {
+    color:red;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration:none;
+}
+.pages{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color:black;
+}
+.pages a{
+    color: black;
+}
+.user-error{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+@media only screen and (max-width:600px){
+    .header{
+        height: 40px;
+        flex-direction: column;
+    }
+    .left-header{
+        position: absolute;
+        left: 0;
+    }
+    .mid-header{
+        display: none;
+    }
+    .user_auth{
+        position: absolute;
+        right: 0;
+    }
+    .user_list a{
+        font-size: 12px;
+    }
+    .user_list .del{
+        font-size: 12px;
+    }
+    .user_list .del:hover{
+        font-size: 12px;
+    }
+}
