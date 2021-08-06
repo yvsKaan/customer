@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 from customer.models import Customer
-from customer.forms import FormNewCustomer
+from customer.forms import CustomerForm
 
 class CustomerFieldTest(TestCase):
     
@@ -62,7 +62,7 @@ class NewCustomerPageTest(TestCase):
         self.assertTemplateUsed(response, "new_customer.html")
 
 
-class UpdateCustomerPageTest(TestCase):
+class DetailCustomerPageTest(TestCase):
     
     def setUp(self):
         self.customer= Customer.objects.create(tc_no='12345678911', name='Kaan', surname='Yavaş', 
@@ -73,13 +73,13 @@ class UpdateCustomerPageTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_home_page_url_name(self):
-        response = self.client.get(reverse('customer-update', args=(self.customer.pk,)), follow=True)
+        response = self.client.get(reverse('customer-detail', args=(self.customer.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
     
     def test_correct_template(self):
-        response = self.client.get(reverse('customer-update', args=(self.customer.pk,)), follow=True)
+        response = self.client.get(reverse('customer-detail', args=(self.customer.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "customer_update.html")
+        self.assertTemplateUsed(response, "customer_detail.html")
 
 
 class NewCustomerFormTest(TestCase):
@@ -87,17 +87,17 @@ class NewCustomerFormTest(TestCase):
     def test_valid_data(self):
         data = {'tc_no': '12345678997', 'name': 'Kaan', 'surname': 'Yavaş',
          'phone': '12345678911', 'city': 'İzmir', 'state': 'Bornova'}
-        form = FormNewCustomer(data=data)
+        form = CustomerForm(data=data)
         self.assertTrue(form.is_valid())
         
     def test_blank_data(self):
-        form = FormNewCustomer({'name': 'Kaan', 'surname': 'Yavaş',
+        form = CustomerForm({'name': 'Kaan', 'surname': 'Yavaş',
          'phone': '12345', 'city': 'İzmir', 'state': 'Bornova'})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors, {'tc_no': ['This field is required.']})
 
     def test_form_error(self):
-        form = FormNewCustomer({'tc_no': '12345', 'name': 'Kaan', 'surname': 'Yavaş',
+        form = CustomerForm({'tc_no': '12345', 'name': 'Kaan', 'surname': 'Yavaş',
          'phone': '12345', 'city': 'İzmir', 'state': 'Bornova'})
         self.assertFalse(form.is_valid())
         self.assertEqual(form.errors, {'__all__': ['Check Your Information!']})
