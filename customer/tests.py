@@ -68,10 +68,6 @@ class DetailCustomerPageTest(TestCase):
         self.customer= Customer.objects.create(tc_no='12345678911', name='Kaan', surname='Yavaş', 
         phone='12345678911', city='İzmir', state='Bornova')
 
-    def test_new_customer_page_status_code(self):
-        response = self.client.get('/detail/', follow=True)
-        self.assertEqual(response.status_code, 200)
-
     def test_home_page_url_name(self):
         response = self.client.get(reverse('customer-detail', args=(self.customer.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
@@ -80,6 +76,21 @@ class DetailCustomerPageTest(TestCase):
         response = self.client.get(reverse('customer-detail', args=(self.customer.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "customer_detail.html")
+
+class UpdateCustomerPageTest(TestCase):
+    
+    def setUp(self):
+        self.customer= Customer.objects.create(tc_no='12345678911', name='Kaan', surname='Yavaş', 
+        phone='12345678911', city='İzmir', state='Bornova')
+
+    def test_home_page_url_name(self):
+        response = self.client.get(reverse('customer-update', args=(self.customer.pk,)), follow=True)
+        self.assertEqual(response.status_code, 200)
+    
+    def test_correct_template(self):
+        response = self.client.get(reverse('customer-update', args=(self.customer.pk,)), follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "customer_form_update.html")
 
 
 class NewCustomerFormTest(TestCase):
