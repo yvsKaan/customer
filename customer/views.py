@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import View, ListView, DetailView, UpdateView, DeleteView, FormView
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
-from django.http import Http404
 
 from .models import Customer
 from .forms import CustomerForm
@@ -16,17 +15,17 @@ class CustomerListView(ListView):
     def get(self,request):
         search = request.GET.get('word', '')
         paginate_by = request.GET.get('paginate', DEFAULT_PAGINATE)
+        queryset = Customer.objects.all()
 
         if search:
-            queryset = Customer.objects.filter(Q(tc_no__icontains = search)|
-                Q(name__icontains = search)|
-                Q(surname__icontains = search)|
-                Q(phone__icontains = search)|
-                Q(city__icontains = search)|
-                Q(state__icontains = search) 
-                )
-        else:
-            queryset = Customer.objects.all()
+            queryset = queryset.filter(
+                Q(tc_no__icontains=search)|
+                Q(name__icontains=search)|
+                Q(surname__icontains=search)|
+                Q(phone__icontains=search)|
+                Q(city__icontains=search)|
+                Q(state__icontains=search) 
+            )
 
         paginator = Paginator(queryset.order_by('-id'), paginate_by)
         page = request.GET.get('page')
@@ -41,7 +40,7 @@ class CustomerListView(ListView):
             'customer_list': queryset, 
             'word': search, 
             'paginate': paginate_by
-            }
+        }
         return render(request, "index.html", context)
 
 
@@ -64,9 +63,9 @@ class NewCustomerFormView(View):
 
 
 class CustomerDetailView(DetailView):
-    queryset = Customer.objects.all()
+    model = Customer
     template_name = 'customer_detail.html'
-
+    
 
 class CustomerUpdateView(UpdateView):
     model = Customer
@@ -76,7 +75,7 @@ class CustomerUpdateView(UpdateView):
     form_class = CustomerForm
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(CustomerUpdateView, self).form_valid(form)
+        return super().form_valid(form)
             
 
 class CustomerDeleteView(DeleteView):
