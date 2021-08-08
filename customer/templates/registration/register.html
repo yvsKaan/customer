@@ -18,10 +18,20 @@
                     {% if form.error %}
                     <p> Hatalı Giriş!</p>
                     {% endif %}
-
-                    <p> Username {{form.username}}</p>
-                    <p> Password {{form.password1}}</p>
-                    <p> Password Confirm {{form.password2}}</p>
+                    <table>
+                        <tr>
+                            <td>Username:</td>
+                            <td>{{form.username}}</td>
+                        </tr>
+                        <tr>
+                            <td>Password:</td>
+                            <td>{{form.password1}}</td>
+                        </tr>
+                        <tr>
+                            <td>Password Confirm:</td>
+                            <td>{{form.password2}}</td>
+                        </tr>
+                    </table>
                     <input type="submit">
                 </form>
                 <div class="login-link">

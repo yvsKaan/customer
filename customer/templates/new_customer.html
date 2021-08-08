@@ -15,8 +15,8 @@
         </div>
 
         {% if perms.Customer.add_user%}
-            <div class="newUser-form-main">
-                <div class="newUser-form">
+            <div class="form-main">
+                <div class="form">
                     <h2>New User Page </h2>
                     <form method="POST">
                         {% csrf_token %}
