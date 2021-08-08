@@ -22,7 +22,7 @@ registration form gives Name, Surname, Tc Number, City, District information fro
 
 ###### 2. Install The Requirements
 
-    pip install requirement.txt
+    pip install -r requirement.txt
 
 ###### 3. Database Process
 
