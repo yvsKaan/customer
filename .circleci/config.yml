@@ -38,8 +38,8 @@ jobs:
       - run: 
           name: circleci python
           command: |
-          sudo chown -R circleci:circleci /usr/local/bin
-          sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
+            sudo chown -R circleci:circleci /usr/local/bin
+            sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "requirement.txt" }}
