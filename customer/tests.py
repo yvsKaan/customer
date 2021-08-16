@@ -6,7 +6,7 @@ from customer.models import Customer
 from customer.forms import CustomerForm
 
 class CustomerFieldTest(TestCase):
-    
+
     def setUp(self):
         self.customer = Customer(tc_no='12345678911', name='Kaan', surname='Yavaş', 
         phone='12345678911', city='İzmir', state='Bornova')
@@ -28,7 +28,7 @@ class CustomerFieldTest(TestCase):
     
     def test_object_name(self):
         expected_object = f'{self.customer.name}, {self.customer.surname}'
-        self.assertEqual(str(customer), expected_object)
+        self.assertEqual(str(self.customer), expected_object)
 
 
 class HomePageTest(TestCase):
