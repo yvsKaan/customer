@@ -52,7 +52,7 @@ class NewCustomerPageTest(TestCase):
         response = self.client.get('/new-customer/')
         self.assertEqual(response.status_code, 200)
 
-    def test_home_page_url_name(self):
+    def test_new_customer_page_url_name(self):
         response = self.client.get(reverse('new-customer'))
         self.assertEqual(response.status_code, 200)
     
@@ -68,7 +68,11 @@ class DetailCustomerPageTest(TestCase):
         self.customer= Customer.objects.create(tc_no='12345678911', name='Kaan', surname='Yavaş', 
         phone='12345678911', city='İzmir', state='Bornova')
 
-    def test_home_page_url_name(self):
+    def test_detail_customer_page_status_code(self):
+        response = self.client.get('/detail/')
+        self.assertEqual(response.status_code, 404)
+    
+    def test_detail_page_url_name(self):
         response = self.client.get(reverse('customer-detail', args=(self.customer.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
     
@@ -83,7 +87,7 @@ class UpdateCustomerPageTest(TestCase):
         self.customer= Customer.objects.create(tc_no='12345678911', name='Kaan', surname='Yavaş', 
         phone='12345678911', city='İzmir', state='Bornova')
 
-    def test_home_page_url_name(self):
+    def test_update_page_url_name(self):
         response = self.client.get(reverse('customer-update', args=(self.customer.pk,)), follow=True)
         self.assertEqual(response.status_code, 200)
     
