@@ -12,7 +12,6 @@ class CustomerForm(forms.ModelForm):
         cleaned_data = super().clean()
         tc_no = cleaned_data.get("tc_no")
         phone = cleaned_data.get("phone")
-        user_list = Customer.objects.all()
         
         if tc_no and phone:
             if (len(tc_no) != 11 
