@@ -1,3 +1,5 @@
+![CircleCI](https://img.shields.io/circleci/build/github/yvsKaan/customer/main) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/Django) ![Django](https://img.shields.io/badge/django-3.2.5-blue) ![Postgres](https://img.shields.io/badge/postgres-12.8-blue)
+
 # Customer Project
 
 ## About The Project:
@@ -50,4 +52,28 @@ After than you can define your username and password.
 
     python manage.py runserver
 
+## How To Use Docker:
+
+###### Build Docker
+
+    docker-compose build 
+
+###### Up Docker
+
+    docker-compose up 
+
+###### Migration
+Use another terminal for this!
+
+* Check your containers name first 
+
+    docker ps
+
+* Reach Django side your container
+    
+    docker exec -it django_container_name bash
+
+* Migrate your database
+
+    python manage.py runserver
     
