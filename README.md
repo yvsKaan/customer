@@ -67,13 +67,12 @@ Use another terminal for this!
 
 * Check your containers name first 
 
-    docker ps
+        docker ps
 
 * Reach Django side your container
     
-    docker exec -it django_container_name bash
+        docker exec -it django_container_name bash
 
 * Migrate your database
 
-    python manage.py runserver
-    
+        python manage.py runserver
