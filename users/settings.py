@@ -14,7 +14,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'nameofapp.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'django-customer.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
