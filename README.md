@@ -7,6 +7,10 @@
 In this project, we created a customer registration form using Django framework. This
 registration form gives Name, Surname, Tc Number, City, District information from the user and saves them information to the system. Also this project allows us to update customer information and delete the registered customer. Last thing about this project, in the homepage users can see the customer list and search specific customers.
 
+### Project Link
+
+    https://django-customer.herokuapp.com/
+
 ## Built with:
 
 ### Backend:
