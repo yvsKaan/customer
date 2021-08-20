@@ -15,14 +15,14 @@ jobs:
       - checkout 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirement.txt" }}
+          - v1-dependencies-{{ checksum "requirements.txt" }}
           - v1-dependencies-
       - run:
           name: Install Python dependencies
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            pip install -r requirement.txt
+            pip install -r requirements.txt
   test:
     docker:
       - image: circleci/python:3.8.10
@@ -39,7 +39,7 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.8/site-packages
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "requirement.txt" }}
+          - v1-dependencies-{{ checksum "requirements.txt" }}
           - v1-dependencies-
       - run:
           name: Run tests
