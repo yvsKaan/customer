@@ -1,0 +1,9 @@
+-   model: customer.customer
+    pk: 1
+    fields:
+        tc_no: '12345678123'
+        name: Kaan
+        surname: Yavaş
+        phone: '12345678911'
+        city: İzmir
+        state: Bornova

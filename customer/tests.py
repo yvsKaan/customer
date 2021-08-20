@@ -81,6 +81,7 @@ class DetailCustomerPageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "customer_detail.html")
 
+
 class UpdateCustomerPageTest(TestCase):
     
     def setUp(self):

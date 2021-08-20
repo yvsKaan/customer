@@ -1,6 +1,4 @@
-import os 
 import environ
-
 from pathlib import Path
 
 env = environ.Env()
@@ -15,7 +13,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', 'nameofapp.herokuapp.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'customer'
+    'customer',
 ]
 
 MIDDLEWARE = [
