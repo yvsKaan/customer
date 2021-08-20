@@ -9,7 +9,7 @@ registration form gives Name, Surname, Tc Number, City, District information fro
 
 ### Project Link
 
-    [Django-Customer-Project](https://django-customer.herokuapp.com/) 
+[Django-Customer-Project](https://django-customer.herokuapp.com/) 
 
 ## Built with:
 
